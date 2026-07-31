@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Utility Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <h1>Smart Utility Dashboard</h1>
+
+        <nav>
+
+            <button onclick="showSection('weather')">
+                <i class="fa-solid fa-cloud-sun"></i> Weather
+            </button>
+
+            <button onclick="showSection('calculator')">
+                <i class="fa-solid fa-calculator"></i> Calculator
+            </button>
+
+            <button onclick="showSection('unit')">
+                <i class="fa-solid fa-ruler"></i> Unit Converter
+            </button>
+
+            <button onclick="showSection('currency')">
+                <i class="fa-solid fa-money-bill-wave"></i> Currency
+            </button>
+
+            <button onclick="showSection('stopwatch')">
+                <i class="fa-solid fa-stopwatch"></i> Stopwatch
+            </button>
+
+            <button onclick="showSection('age')">
+                <i class="fa-solid fa-cake-candles"></i> Age Calculator
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= WEATHER ================= -->
+
+    <section id="weather" class="module">
+
+        <h2>🌤 Weather Dashboard</h2>
+
+        <input
+            type="text"
+            id="city"
+            placeholder="Enter City Name">
+
+        <button onclick="getWeather()">
+            Search
+        </button>
+
+        <div id="weatherResult"></div>
+
+    </section>
+
+
+    <!-- ================= CALCULATOR ================= -->
+
+    <section id="calculator" class="module hidden">
+
+        <h2>🧮 Scientific Calculator</h2>
+
+        <input
+            type="text"
+            id="display"
+            readonly>
+
+        <div class="calculator">
+
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('/')">÷</button>
+
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('*')">×</button>
+
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('-')">−</button>
+
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendValue('+')">+</button>
+
+            <button onclick="sqrt()">√</button>
+            <button onclick="square()">x²</button>
+            <button onclick="clearDisplay()">AC</button>
+            <button onclick="backspace()">DEL</button>
+
+            <button onclick="percentage()">%</button>
+<button onclick="factorial()">!</button>
+
+<button onclick="sin()">sin</button>
+<button onclick="cos()">cos</button>
+<button onclick="tan()">tan</button>
+
+<button onclick="log()">log</button>
+<button onclick="ln()">ln</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= UNIT CONVERTER ================= -->
+
+   <section id="unit" class="module hidden">
+
+    <h2>📏 Unit Converter</h2>
+
+    <!-- Category -->
+    <select id="category" onchange="updateUnits()">
+
+        <option value="length">Length</option>
+        <option value="weight">Weight</option>
+        <option value="temperature">Temperature</option>
+        <option value="area">Area</option>
+        <option value="volume">Volume</option>
+        <option value="speed">Speed</option>
+        <option value="time">Time</option>
+        <option value="pressure">Pressure</option>
+        <option value="energy">Energy</option>
+        <option value="power">Power</option>
+        <option value="data">Digital Storage</option>
+        <option value="angle">Angle</option>
+
+    </select>
+
+    <!-- Value -->
+
+    <input
+        type="number"
+        id="unitValue"
+        placeholder="Enter Value">
+
+    <!-- From Unit -->
+
+    <select id="fromUnit">
+
+    </select>
+
+    <!-- To Unit -->
+
+    <select id="toUnit">
+
+    </select>
+
+    <!-- Convert Button -->
+
+    <button onclick="convertUnit()">
+
+        Convert
+
+    </button>
+
+    <!-- Result -->
+
+    <div id="unitResult"></div>
+
+</section>
+
+
+    <!-- ================= CURRENCY ================= -->
+
+    <section id="currency" class="module hidden">
+
+    <h2>💱 Currency Converter</h2>
+
+    <input
+        type="number"
+        id="amount"
+        placeholder="Enter Amount">
+
+    <select id="from">
+
+        <option value="USD">USD</option>
+        <option value="INR">INR</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="JPY">JPY</option>
+        <option value="AUD">AUD</option>
+
+    </select>
+
+    <select id="to">
+
+        <option value="INR">INR</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="JPY">JPY</option>
+        <option value="AUD">AUD</option>
+
+    </select>
+
+    <button onclick="convertCurrency()">
+
+        Convert
+
+    </button>
+
+    <div id="currencyResult"></div>
+
+</section>
+
+
+    <!-- ================= STOPWATCH ================= -->
+
+    <section id="stopwatch" class="module hidden">
+
+    <h2>⏱ Stopwatch</h2>
+
+    <h1 id="time">00:00:00</h1>
+
+    <button onclick="startWatch()">Start</button>
+
+    <button onclick="pauseWatch()">Pause</button>
+
+    <button onclick="resetWatch()">Reset</button>
+
+    <hr><br>
+
+    <h2>⏰ Countdown Timer</h2>
+
+    <input
+        type="number"
+        id="minutes"
+        placeholder="Minutes">
+
+    <input
+        type="number"
+        id="seconds"
+        placeholder="Seconds">
+
+    <h2 id="timerDisplay">
+
+        00:00
+
+    </h2>
+
+    <button onclick="startTimer()">
+
+        Start Timer
+
+    </button>
+
+    <button onclick="stopTimer()">
+
+        Pause
+
+    </button>
+
+    <button onclick="resetTimer()">
+
+        Reset
+
+    </button>
+
+</section>
+
+    <!-- ================= AGE ================= -->
+
+    <section id="age" class="module hidden">
+
+    <h2>🎂 Age Calculator</h2>
+
+    <label>Date of Birth</label>
+
+    <input
+        type="date"
+        id="dob">
+
+    <button onclick="calculateAge()">
+
+        Calculate Age
+
+    </button>
+
+    <div id="ageResult"></div>
+
+</section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Smart Utility Dashboard
+
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JS ================= -->
+
+    <script src="js/weather.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/unitConverter.js"></script>
+    <script src="js/currencyConverter.js"></script>
+    <script src="js/stopwatch.js"></script>
+    <script src="js/ageCalculator.js"></script>
+
+    <script>
+
+        function showSection(id){
+
+            let sections=document.querySelectorAll(".module");
+
+            sections.forEach(section=>{
+
+                section.classList.add("hidden");
+
+            });
+
+            document.getElementById(id).classList.remove("hidden");
+
+        }
+
+    </script>
+
+</body>
+</html>
